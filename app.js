@@ -92,7 +92,20 @@ function init() {
   document.getElementById('score-1').textContent = '0';
   document.getElementById('current-0').textContent = '0';
   document.getElementById('current-1').textContent = '0';
-}
+
+  // resetting player names from 'winner'
+  document.getElementById('name-0').textContent = 'Player 1';
+  document.getElementById('name-1').textContent = 'Player 2';
+
+  // resetting class list to default (without 'winner')
+  document.querySelector('.player-0-panel').classList.remove('winner');
+  document.querySelector('.player-1-panel').classList.remove('winner');
+
+  // resetting activePlayer to player0
+  document.querySelector('.player-0-panel').classList.remove('active');
+  document.querySelector('.player-0-panel').classList.add('active');
+  document.querySelector('.player-1-panel').classList.remove('active');
+};
 
 
 
