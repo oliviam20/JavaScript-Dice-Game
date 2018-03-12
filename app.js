@@ -16,7 +16,7 @@ document.getElementById('score-1').textContent = '0';
 document.getElementById('current-0').textContent = '0';
 document.getElementById('current-1').textContent = '0';
 
-// addEventListener registers a single event listener on a single target. 2 args: 1. the event type e.g. click. 2. the function to be called when the event happens. note: you can use anonymous function as argument instead of external function like btn() on line 14 e.g. function() {}
+// addEventListener registers a single event listener on a single target. 2 args: 1. the event type e.g. click. 2. the function to be called when the event happens. note: you can use anonymous function as argument instead of external function like btn() on line 20 e.g. function() {}
 function btn() {
   // 1. random number
   // Math.floor removes the decimals
@@ -36,20 +36,7 @@ function btn() {
     document.querySelector('#current-' + activePlayer).textContent = roundScore; // displaying the round score
   } else {
     // next player
-    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
-    roundScore = 0; // that round's score needs to be set back to 0
-
-    // when a player rolls a 1, they should lose that current score
-    document.getElementById('current-0').textContent = 0;
-    document.getElementById('current-1').textContent = 0;
-
-    // changing the active player 'display dot' in the class name (ionic framework icons)
-    // classList.toggle() adds class if argument is present in class of HTML element; it removes class if argument is not present in class of HTML element
-    document.querySelector('.player-0-panel').classList.toggle('active');
-    document.querySelector('.player-1-panel').classList.toggle('active');
-    // another way of doing it:
-    // document.querySelector('.player-0-panel').classList.remove('active'); // we pass in the name of the class we want to remove to remove()
-    // document.querySelector('.player-1-panel').classList.add('active');
+    nextPlayer();
 
     document.querySelector('.dice').style.display = 'none';
   }
@@ -61,7 +48,7 @@ document.querySelector('.btn-roll').addEventListener('click', btn);
 
 
 // button hold - hold the score and change active player
-document.querySelector('.btn-hold').addEventListener('click', function() {
+document.querySelector('.btn-hold').addEventListener('click', function() { // anonymous function
   // Add current score to global score
   // score[0] is player0; score[1] is player1. We're adding activePlayer's round score to their global score
   scores[activePlayer] += roundScore;
@@ -71,9 +58,35 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
 
 
   // Check if player won the game
+  if (scores[activePlayer] >= 100) {
+    document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
+    document.querySelector('.dice').style.display = 'none';
+    document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+    document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+  } else {
+    // Next player if there's no winner
+    nextPlayer();
+  }
+
 });
 
 
+function nextPlayer() {
+  activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+  roundScore = 0; // that round's score needs to be set back to 0
+
+  // when a player rolls a 1, they should lose that current score
+  document.getElementById('current-0').textContent = 0;
+  document.getElementById('current-1').textContent = 0;
+
+  // changing the active player 'display dot' in the class name (ionic framework icons)
+  // classList.toggle() adds class if argument is present in class of HTML element; it removes class if argument is not present in class of HTML element
+  document.querySelector('.player-0-panel').classList.toggle('active');
+  document.querySelector('.player-1-panel').classList.toggle('active');
+  // another way of doing it:
+  // document.querySelector('.player-0-panel').classList.remove('active'); // we pass in the name of the class we want to remove to remove()
+  // document.querySelector('.player-1-panel').classList.add('active');
+};
 
 
 
