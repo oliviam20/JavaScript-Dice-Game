@@ -60,6 +60,19 @@ document.querySelector('.btn-roll').addEventListener('click', btn);
 
 
 
+// button hold - hold the score and change active player
+document.querySelector('.btn-hold').addEventListener('click', function() {
+  // Add current score to global score
+  // score[0] is player0; score[1] is player1. We're adding activePlayer's round score to their global score
+  scores[activePlayer] += roundScore;
+
+  // Update the UI
+  document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+
+
+  // Check if player won the game
+});
+
 
 
 
