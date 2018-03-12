@@ -1,4 +1,5 @@
-Deployed link: https://js-pig-game.herokuapp.com/
+# Deployed link
+https://js-pig-game.herokuapp.com/
 
 # GAME RULES
 
