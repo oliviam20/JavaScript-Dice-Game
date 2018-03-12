@@ -37,4 +37,4 @@ I’ll assume the Heroku app is all set up and the final step is the deployment 
 5. Add the line: `<?php include_once("index.html"); ?>` inside.
 6. Now update the repo on Github if it’s connected to your account or Heroku command git push heroku master . Wait for the automatic deploy to work its magic and tada!
 
-(src)[https://medium.com/@winnieliang/how-to-run-a-simple-html-css-javascript-application-on-heroku-4e664c541b0b]
+[src](https://medium.com/@winnieliang/how-to-run-a-simple-html-css-javascript-application-on-heroku-4e664c541b0b)
