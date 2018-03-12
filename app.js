@@ -50,6 +50,8 @@ function btn() {
     // another way of doing it:
     // document.querySelector('.player-0-panel').classList.remove('active'); // we pass in the name of the class we want to remove to remove()
     // document.querySelector('.player-1-panel').classList.add('active');
+
+    document.querySelector('.dice').style.display = 'none';
   }
 }
 document.querySelector('.btn-roll').addEventListener('click', btn);
