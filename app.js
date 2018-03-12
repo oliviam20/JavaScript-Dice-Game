@@ -14,7 +14,7 @@ document.querySelector('.dice').style.display = 'none';
 document.getElementById('score-0').textContent = '0';
 document.getElementById('score-1').textContent = '0';
 document.getElementById('current-0').textContent = '0';
-document.getElementById('current-1').textContent = '0'; 
+document.getElementById('current-1').textContent = '0';
 
 // addEventListener registers a single event listener on a single target. 2 args: 1. the event type e.g. click. 2. the function to be called when the event happens. note: you can use anonymous function as argument instead of external function like btn() on line 14 e.g. function() {}
 function btn() {
@@ -30,6 +30,27 @@ function btn() {
   diceDOM.src = 'dice-' + dice + '.png';
 
   // 3. update the round score IF the rolled number is NOT a 1
+  if (dice !== 1) {
+    // Add score
+    roundScore += dice; // same as roundScore = roundScore + dice;
+    document.querySelector('#current-' + activePlayer).textContent = roundScore; // displaying the round score
+  } else {
+    // next player
+    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+    roundScore = 0; // that round's score needs to be set back to 0
+
+    // when a player rolls a 1, they should lose that current score
+    document.getElementById('current-0').textContent = 0;
+    document.getElementById('current-1').textContent = 0;
+
+    // changing the active player 'display dot' in the class name (ionic framework icons)
+    // classList.toggle() adds class if argument is present in class of HTML element; it removes class if argument is not present in class of HTML element
+    document.querySelector('.player-0-panel').classList.toggle('active');
+    document.querySelector('.player-1-panel').classList.toggle('active');
+    // another way of doing it:
+    // document.querySelector('.player-0-panel').classList.remove('active'); // we pass in the name of the class we want to remove to remove()
+    // document.querySelector('.player-1-panel').classList.add('active');
+  }
 }
 document.querySelector('.btn-roll').addEventListener('click', btn);
 // 2nd arg (function) we don't need to add () because we're not calling it, the event listener will call the function for us. This is known as callback function; a function that is not called by us, but by another function. The function that is pass into another function as an argument and this function (addEventListener method) will then call that function for us
