@@ -1,22 +1,8 @@
 var scores, roundScore, activePlayer;
 
-scores = [0,0];
-roundScore = 0;
-activePlayer = 0; // 0 is first player, 1 is second player
+init();
 
-
-// CODE STARTS
-
-// we want to change the style to display:none because when the user first opens the webpage, the dice should not be visible
-document.querySelector('.dice').style.display = 'none';
-
-// getElementById only works for ids but is faster than querySelector. Unlike querySelector, it doesn't need '#' for id because it know it's an id already
-document.getElementById('score-0').textContent = '0';
-document.getElementById('score-1').textContent = '0';
-document.getElementById('current-0').textContent = '0';
-document.getElementById('current-1').textContent = '0';
-
-// addEventListener registers a single event listener on a single target. 2 args: 1. the event type e.g. click. 2. the function to be called when the event happens. note: you can use anonymous function as argument instead of external function like btn() on line 20 e.g. function() {}
+// addEventListener registers a single event listener on a single target. 2 args: 1. the event type e.g. click. 2. the function to be called when the event happens. note: you can use anonymous function as argument instead of external function like btn() on line 6 e.g. function() {}
 function btn() {
   // 1. random number
   // Math.floor removes the decimals
@@ -89,6 +75,24 @@ function nextPlayer() {
 };
 
 
+// new game button
+document.querySelector('.btn-new').addEventListener('click', init);
+
+function init() {
+  // reset scores to 0
+  scores = [0,0];
+  roundScore = 0;
+  activePlayer = 0; // 0 is first player, 1 is second player
+
+  // we want to change the style to display:none because when the user first opens the webpage, the dice should not be visible
+  document.querySelector('.dice').style.display = 'none';
+
+  // getElementById only works for ids but is faster than querySelector. Unlike querySelector, it doesn't need '#' for id because it know it's an id already
+  document.getElementById('score-0').textContent = '0';
+  document.getElementById('score-1').textContent = '0';
+  document.getElementById('current-0').textContent = '0';
+  document.getElementById('current-1').textContent = '0';
+}
 
 
 
