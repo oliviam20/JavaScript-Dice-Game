@@ -9,6 +9,11 @@ https://js-pig-game.herokuapp.com/
 4. The player can choose to 'Hold', which means that his ROUND score gets added to his GLBAL score. After that, it's the next player's turn
 5. The first player to reach 100 points on GLOBAL score wins the game
 
+## Additional Rules
+
+1. A player looses their ENTIRE score when he rolls two 6 in row. After that, it's the next player's turn
+2. The player will loose their current score when one of them is a 1.
+
 # Heroku deployment
 
 Heroku allows web-hosting but what do you know? They do not host static websites straight up with HTML, CSS, and JS.

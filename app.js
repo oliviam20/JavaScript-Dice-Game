@@ -1,9 +1,9 @@
 // declaring variables in global scope so all functions will have access to these
-var scores, roundScore, activePlayer, gamePlaying;
+var scores, roundScore, activePlayer, gamePlaying, prevDice, isPlayed;
 
 init();
 
-// addEventListener registers a single event listener on a single target. 2 args: 1. the event type e.g. click. 2. the function to be called when the event happens. note: you can use anonymous function as argument instead of external function like btn() on line 6 e.g. function() {}
+// addEventListener registers a single event listener on a single target. 2 args: 1. the event type e.g. click. 2. the function to be called when the event happens. note: you can use anonymous function as argument instead of external function like btn() on line 7 e.g. function() {}
 function btn() {
   if (gamePlaying) {
     // 1. random number
@@ -11,18 +11,34 @@ function btn() {
     // Math.random gives a random number between 0 and 1. We multiply that by 6 to get random number between 0 - 5. We add 1 to get random number between 1 - 6.
     var dice = Math.floor(Math.random() * 6) + 1;
 
+    // Checking if dice has been rolled
+    if (!isPlayed) {
+      isPlayed = true;
+      prevDice = 0;
+    }
+
     //2. display result: unhiding the dice after 'rolling' it
     var diceDOM = document.querySelector('.dice');
     diceDOM.style.display = 'block';
     // changing the dice image src
     diceDOM.src = 'dice-' + dice + '.png';
 
-    // 3. update the round score IF the rolled number is NOT a 1
-    if (dice !== 1) {
-      // Add score
-      roundScore += dice; // same as roundScore = roundScore + dice;
-      document.querySelector('#current-' + activePlayer).textContent = roundScore; // displaying the round score
+    console.log('player: ' + activePlayer + ' prevDice: ' + prevDice + ' ## dice: ' + dice);
+
+    // 3. update the round score IF the rolled number is NOT a 1 && if didn't roll double 6
+    if (dice !== 1 && ((dice !== 6 && prevDice !== 6) || (dice !== 6 && prevDice === 6) || (dice === 6 && prevDice !== 6))) {
+        // Add score
+        roundScore += dice; // same as roundScore = roundScore + dice;
+        document.querySelector('#current-' + activePlayer).textContent = roundScore; // displaying the round score
+        prevDice = dice;
+
     } else {
+      // only reset the global score if rolled double 6
+      if (dice === prevDice && dice === 6) {
+        scores[activePlayer] = 0;
+        // update UI
+        document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+      }
       // next player
       nextPlayer();
 
@@ -79,6 +95,9 @@ function nextPlayer() {
   // another way of doing it:
   // document.querySelector('.player-0-panel').classList.remove('active'); // we pass in the name of the class we want to remove to remove()
   // document.querySelector('.player-1-panel').classList.add('active');
+
+  // resetting the first roll back to false
+  isPlayed = false;
 };
 
 
@@ -113,7 +132,12 @@ function init() {
   document.querySelector('.player-0-panel').classList.remove('active');
   document.querySelector('.player-0-panel').classList.add('active');
   document.querySelector('.player-1-panel').classList.remove('active');
+
+  // resetting the first roll back to false
+  isPlayed = false;
 };
+
+
 
 
 
