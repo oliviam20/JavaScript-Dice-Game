@@ -1,5 +1,5 @@
 // declaring variables in global scope so all functions will have access to these
-var scores, roundScore, activePlayer, gamePlaying, prevDice, isPlayed;
+var scores, roundScore, activePlayer, gamePlaying, prevDice, isPlayed, inputScore;
 
 init();
 
@@ -23,7 +23,7 @@ function btn() {
     // changing the dice image src
     diceDOM.src = 'dice-' + dice + '.png';
 
-    console.log('player: ' + activePlayer + ' prevDice: ' + prevDice + ' ## dice: ' + dice);
+    // console.log('player: ' + activePlayer + ' prevDice: ' + prevDice + ' ## dice: ' + dice);
 
     // 3. update the round score IF the rolled number is NOT a 1 && if didn't roll double 6
     if (dice !== 1 && ((dice !== 6 && prevDice !== 6) || (dice !== 6 && prevDice === 6) || (dice === 6 && prevDice !== 6))) {
@@ -65,7 +65,7 @@ document.querySelector('.btn-hold').addEventListener('click', function() { // an
 
 
     // Check if player won the game
-    if (scores[activePlayer] >= 100) {
+    if (scores[activePlayer] >= inputScore) {
       document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
       document.querySelector('.dice').style.display = 'none';
       document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
@@ -135,6 +135,10 @@ function init() {
 
   // resetting the first roll back to false
   isPlayed = false;
+
+  // checking for user input for new score goal
+  inputScore = document.getElementById('input-score').value;
+  // console.log(inputScore);
 };
 
 

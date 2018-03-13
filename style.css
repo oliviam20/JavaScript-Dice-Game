@@ -38,6 +38,11 @@ body {
     overflow: hidden;
 }
 
+.scoring {
+  position:relative;
+  text-align: center;
+}
+
 .player-0-panel,
 .player-1-panel {
     width: 50%;
