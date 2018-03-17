@@ -9,33 +9,42 @@ function btn() {
     // 1. random number
     // Math.floor removes the decimals
     // Math.random gives a random number between 0 and 1. We multiply that by 6 to get random number between 0 - 5. We add 1 to get random number between 1 - 6.
-    var dice = Math.floor(Math.random() * 6) + 1;
+    var dice1 = Math.floor(Math.random() * 6) + 1;
+    var dice2 = Math.floor(Math.random() * 6) + 1;
 
     //2. display result: unhiding the dice after 'rolling' it
-    var diceDOM = document.querySelector('.dice');
-    diceDOM.style.display = 'block';
+    document.getElementById('dice-1').style.display = 'block';
+    document.getElementById('dice-2').style.display = 'block';
     // changing the dice image src
-    diceDOM.src = 'dice-' + dice + '.png';
+    document.getElementById('dice-1').src = 'dice-' + dice1 + '.png';
+    document.getElementById('dice-2').src = 'dice-' + dice2 + '.png';
 
     // debugging
     // console.log('player: ' + activePlayer + ' prevDice: ' + prevDice + ' ## dice: ' + dice);
 
     // 3. update the round score IF the rolled number is NOT a 1 && if didn't roll double 6
-    if (dice === 6 && prevDice === 6) {
-      scores[activePlayer] = 0;
-      // update UI
-      document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
-      nextPlayer();
-    } else if (dice !== 1) {
-        // Add score
-        roundScore += dice; // same as roundScore = roundScore + dice;
-        document.querySelector('#current-' + activePlayer).textContent = roundScore; // displaying the round score
-    } else {
-      // next player
-      nextPlayer();
-    }
+    if (dice1 !== 1 && dice2 !== 1) {
+      roundScore += dice1 + dice2;
+      document.querySelector('#current-' + activePlayer).textContent = roundScore;
+    } 
+
+
+    // if (dice === 6 && prevDice === 6) {
+    //   scores[activePlayer] = 0;
+    //   // update UI
+    //   document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+    //   nextPlayer();
+    // } else if (dice !== 1) {
+    //     // Add score
+    //     roundScore += dice; // same as roundScore = roundScore + dice;
+    //     document.querySelector('#current-' + activePlayer).textContent = roundScore; // displaying the round score
+    // } else {
+    //   // next player
+    //   nextPlayer();
+    // }
     // setting the previous rolled dice to 'dice'
     prevDice = dice;
+
   }
 
 }
@@ -69,7 +78,8 @@ document.querySelector('.btn-hold').addEventListener('click', function() { // an
     // Check if player won the game
     if (scores[activePlayer] >= inputScore) {
       document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
-      document.querySelector('.dice').style.display = 'none';
+      document.getElementById('dice-1').style.display = 'none';
+      document.getElementById('dice-2').style.display = 'none';
       document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
       document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
       gamePlaying = false;
@@ -87,7 +97,8 @@ function nextPlayer() {
   roundScore = 0; // that round's score needs to be set back to 0
 
   // hiding the dice image on next player's turn
-  document.querySelector('.dice').style.display = 'none';
+  document.getElementById('dice-1').style.display = 'none';
+  document.getElementById('dice-2').style.display = 'none';
 
   // when a player rolls a 1, they should lose that current score
   document.getElementById('current-0').textContent = 0;
@@ -114,7 +125,8 @@ function init() {
   gamePlaying = true;
 
   // we want to change the style to display:none because when the user first opens the webpage, the dice should not be visible
-  document.querySelector('.dice').style.display = 'none';
+  document.getElementById('dice-1').style.display = 'none';
+  document.getElementById('dice-2').style.display = 'none';
 
   // getElementById only works for ids but is faster than querySelector. Unlike querySelector, it doesn't need '#' for id because it know it's an id already
   document.getElementById('score-0').textContent = '0';
