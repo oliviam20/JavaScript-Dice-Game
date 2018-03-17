@@ -16,6 +16,10 @@
   text-transform: uppercase;
 }
 
+.input-score:focus {
+  outline: none;
+}
+
 * {
     margin: 0;
     padding: 0;
