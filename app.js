@@ -148,7 +148,6 @@ function init() {
 
 
 
-
 // other notes
 
 // querySelector lets us select stuff exactly the way we do it in CSS. The only difference is that it selects the first element it finds
