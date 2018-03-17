@@ -1,5 +1,5 @@
 // declaring variables in global scope so all functions will have access to these
-var scores, roundScore, activePlayer, gamePlaying, prevDice, isPlayed, inputScore;
+var scores, roundScore, activePlayer, gamePlaying, prevDice, inputScore;
 
 init();
 
@@ -11,12 +11,6 @@ function btn() {
     // Math.random gives a random number between 0 and 1. We multiply that by 6 to get random number between 0 - 5. We add 1 to get random number between 1 - 6.
     var dice = Math.floor(Math.random() * 6) + 1;
 
-    // Checking if dice has been rolled
-    if (!isPlayed) {
-      isPlayed = true;
-      prevDice = 0;
-    }
-
     //2. display result: unhiding the dice after 'rolling' it
     var diceDOM = document.querySelector('.dice');
     diceDOM.style.display = 'block';
@@ -26,24 +20,21 @@ function btn() {
     // console.log('player: ' + activePlayer + ' prevDice: ' + prevDice + ' ## dice: ' + dice);
 
     // 3. update the round score IF the rolled number is NOT a 1 && if didn't roll double 6
-    if (dice !== 1 && ((dice !== 6 && prevDice !== 6) || (dice !== 6 && prevDice === 6) || (dice === 6 && prevDice !== 6))) {
+    if (dice === 6 && prevDice === 6) {
+      scores[activePlayer] = 0;
+      // update UI
+      document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+      nextPlayer();
+    } else if (dice !== 1) {
         // Add score
         roundScore += dice; // same as roundScore = roundScore + dice;
         document.querySelector('#current-' + activePlayer).textContent = roundScore; // displaying the round score
-        prevDice = dice;
-
     } else {
-      // only reset the global score if rolled double 6
-      if (dice === prevDice && dice === 6) {
-        scores[activePlayer] = 0;
-        // update UI
-        document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
-      }
       // next player
       nextPlayer();
-
-      document.querySelector('.dice').style.display = 'none';
     }
+    // setting the previous rolled dice to 'dice'
+    prevDice = dice;
   }
 
 }
@@ -84,6 +75,9 @@ function nextPlayer() {
   activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
   roundScore = 0; // that round's score needs to be set back to 0
 
+  // hiding the dice image on next player's turn
+  document.querySelector('.dice').style.display = 'none';
+
   // when a player rolls a 1, they should lose that current score
   document.getElementById('current-0').textContent = 0;
   document.getElementById('current-1').textContent = 0;
@@ -95,9 +89,6 @@ function nextPlayer() {
   // another way of doing it:
   // document.querySelector('.player-0-panel').classList.remove('active'); // we pass in the name of the class we want to remove to remove()
   // document.querySelector('.player-1-panel').classList.add('active');
-
-  // resetting the first roll back to false
-  isPlayed = false;
 };
 
 
@@ -132,9 +123,6 @@ function init() {
   document.querySelector('.player-0-panel').classList.remove('active');
   document.querySelector('.player-0-panel').classList.add('active');
   document.querySelector('.player-1-panel').classList.remove('active');
-
-  // resetting the first roll back to false
-  isPlayed = false;
 
   // checking for user input for new score goal
   inputScore = document.getElementById('input-score').value;
