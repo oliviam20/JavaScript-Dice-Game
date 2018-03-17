@@ -17,6 +17,7 @@ function btn() {
     // changing the dice image src
     diceDOM.src = 'dice-' + dice + '.png';
 
+    // debugging
     // console.log('player: ' + activePlayer + ' prevDice: ' + prevDice + ' ## dice: ' + dice);
 
     // 3. update the round score IF the rolled number is NOT a 1 && if didn't roll double 6
@@ -126,6 +127,7 @@ function init() {
 
   // checking for user input for new score goal
   inputScore = document.getElementById('input-score').value;
+  // debugging
   // console.log(inputScore);
 };
 

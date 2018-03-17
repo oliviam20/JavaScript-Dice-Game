@@ -2,6 +2,20 @@
 *** GENERAL
 **********************************************/
 
+.input-score {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 520px;
+  color: #555;
+  font-size: 18px;
+  font-family: 'Lato';
+  text-align: center;
+  padding: 10px;
+  width: 160px;
+  text-transform: uppercase;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -36,11 +50,6 @@ body {
     background-color: #fff;
     box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.3);
     overflow: hidden;
-}
-
-.scoring {
-  position:relative;
-  text-align: center;
 }
 
 .player-0-panel,
