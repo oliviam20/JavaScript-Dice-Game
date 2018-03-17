@@ -14,6 +14,10 @@ https://js-pig-game.herokuapp.com/
 1. A player looses their ENTIRE score when he rolls two double 6 in row. After that, it's the next player's turn
 2. The player will loose their current score when one of them is a 1. After that, it's the next player's turn
 
+# Run locally
+
+Simply open index.html in your internet browser or enter the file path in the URL.
+
 # Heroku deployment
 
 Heroku allows web-hosting but what do you know? They do not host static websites straight up with HTML, CSS, and JS.
