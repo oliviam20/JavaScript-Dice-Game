@@ -55,6 +55,16 @@ document.querySelector('.btn-hold').addEventListener('click', function() { // an
     // Update the UI
     document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 
+    // checking for user input for new score goal
+    inputScore = document.getElementById('input-score').value;
+    // debugging
+    // console.log(inputScore);
+
+    // check if user had input a score to win
+    // if undefined, 0, null, "", JS coerced to FALSE. Anything else is coerced to TRUE
+    if (!inputScore) {
+      inputScore = 100;
+    }
 
     // Check if player won the game
     if (scores[activePlayer] >= inputScore) {
@@ -125,10 +135,6 @@ function init() {
   document.querySelector('.player-0-panel').classList.add('active');
   document.querySelector('.player-1-panel').classList.remove('active');
 
-  // checking for user input for new score goal
-  inputScore = document.getElementById('input-score').value;
-  // debugging
-  // console.log(inputScore);
 };
 
 
